@@ -224,6 +224,7 @@ func (m *Machine) ExecBootstrap(ctx context.Context, data string) error {
 	for _, command := range commands {
 		cmd := m.container.Commander.Command(command.Cmd, command.Args...)
 		cmd.SetStderr(&out)
+		cmd.SetStdout(os.Stdout)
 		if command.Stdin != "" {
 			cmd.SetStdin(strings.NewReader(command.Stdin))
 		}
